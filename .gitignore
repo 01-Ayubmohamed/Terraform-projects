@@ -1,6 +1,9 @@
 #######################################
 # Terraform
 #######################################
+# terraform core files
+.terraform/
+.terraform.lock.hcl
 
 # Local .terraform directories
 .terraform/
@@ -34,4 +37,4 @@ terraform.rc
 .idea/
 .vscode/
 *.swp
-*.log
+*.logs

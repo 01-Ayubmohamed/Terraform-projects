@@ -1,3 +1,29 @@
+#variable for vpc 
+
+variable "azs" {
+    description = "List of availability zones"
+    default    = ["us-east-1a", "us-east-1b"]
+}
+
+variable "vpc_cidr" {
+    description = "CIDR block for the VPC"
+    default     = "10.0.0.0/16"
+}
+
+variable "db_subnet_group_name" {
+    default = "rds-subnet-group"
+}
+
+
+# variable for subnet 
+
+variable "subnet_cidrs" {
+    description = "List of subnet CIDR blocks"
+    default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24"]
+}
+
+
+# variable for EC2 instance type
 variable "instance_type" {
     type   = string
     default = "t3.micro"
@@ -8,26 +34,39 @@ variable "region" {
     default = "us-east-1"
 }
 
+variable "instance_ami" {
+    type    = string
 
-locals {
-    instance_ami = "ami-0b6c6ebed2801a5cb"
+    default = "ami-0b6c6ebed2801a5cb"
 }
 
-locals {
-    DB_NAME = "db_ayub"
-    DB_USERNAME = "admin_ayub"
-    DB_PASSWORD = "123"
-    DB_HOST = "mydbinstance.123456789012.us-east-1.rds.amazonaws.com"
-    instance_class = "db.t3.micro"
-    db_subnet_group_name = "rds-subnet-group"
+# variable for RDS instance
+variable "DB_NAME" {
+    default = "db_ayub"
+}
+variable "DB_USER" {
+    default = "admin_ayub"
+}
+variable "DB_PASSWORD" {
+    default = "123" # change later for stronger password
+}
+variable "instance_class" {
+    type    = string
+    default = "db.t3.micro"
+}
+
+variable "DB_HOST" {
+    default = ""
+}
+
+variable "db_endpoint" {
+    default = ""
+}
+
+variable "WEB_DIR" {
+    default = "/var/www/html"
 }
 
 
-# DB_NAME="${db_name}"
-# DB_USER="${db_username}"
-# DB_PASSWORD="${db_password}"
-# DB_HOST="${db_endpoint}"
-
-# WEB_DIR="/var/www/html"
-
+# variable for security group
 
