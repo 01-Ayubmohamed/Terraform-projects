@@ -48,7 +48,8 @@ variable "DB_USER" {
     default = "admin_ayub"
 }
 variable "DB_PASSWORD" {
-    default = "123" # change later for stronger password
+    type = string
+    sensitive = true
 }
 variable "instance_class" {
     type    = string
