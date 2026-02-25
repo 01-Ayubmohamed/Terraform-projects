@@ -5,20 +5,12 @@ output "vpc_id" {
     value       = aws_vpc.main.id
 }
 
-output "public_subnet_ids" {
-    description = "The IDs of the public subnets"
-    value       = [
-        aws_subnet.public_subnet1.id,
-        aws_subnet.public_subnet2.id,
-    ]
+output "public_subnet" {
+    value       = [for subnet in aws_subnet.public_subnet : subnet.id]
 }
 
-output "private_subnet_ids" {
-    description = "The IDs of the private subnets"
-    value       = [
-        aws_subnet.private_subnet1.id,
-        aws_subnet.private_subnet2.id,
-    ]
+output "private_subnet" {
+    value       = [for subnet in aws_subnet.private_subnet : subnet.id]
 }
 
 output "db_subnet_group_name" {
@@ -26,9 +18,9 @@ output "db_subnet_group_name" {
     value       = aws_db_subnet_group.db_subnet_group.name
 }
 
-output "EC2_sg_id" {
-    description = "The ID of the EC2 security group"
-    value       = aws_security_group.ec2_sg.id
+output "ec2_sg_id" {
+    description = "value"
+    value = aws_security_group.ec2_sg.id
 }
 
 

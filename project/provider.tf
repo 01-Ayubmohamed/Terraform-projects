@@ -8,11 +8,11 @@ terraform {
 
   backend "s3" {
     bucket = "terraform-state-ayub"
-    key = "terraform-projects-1/terraform.tfstate"
+    key = "wordpress/terraform.tfstate"
     region = "us-east-1"
-}
-}
 
+}
+}
 
 provider "aws" {
   region = "us-east-1"

@@ -1,22 +1,59 @@
-#variable for vpc 
+# 2nd attempt 
 
-variable "azs" {
-    description = "List of availability zones"
-    default    = ["us-east-1a", "us-east-1b"]
+# variable for vpc and subnets
+
+# VPC variable
+
+variable vpc_id {
+    description = "VPC ID, created by the VPC module"
+    default      = ""
 }
 
 variable "vpc_cidr" {
-    description = "CIDR block for the VPC"
-    default     = "10.0.0.0/16"
+   default = "10.0.0.0/16"
+}
+variable "az" {
+    description = "list of available azs in the region"
+    type = list(string)
 }
 
-# variable for subnet 
+# variable for public and private subnets
 
-variable "subnet_cidrs" {
-    description = "List of subnet CIDR blocks"
-    default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24"]
+variable "public_subnets" {
+    type = list(object({
+        cidr_block = string
+        az         = string
+    }))
+}
+
+variable "private_subnets" {
+    type = list(object({
+        cidr_block = string
+        az         = string
+
+    }))
 }
 
 variable "db_subnet_group_name" {
-    default = "rds-subnet-group"
+    default = "rds_subnet_group"
 }
+
+
+# variable for security group
+
+variable "ec2_sg_id" {
+  type = list(object({
+    port        = number
+    description = string
+    protocol    = string          
+    cidr_blocks = list(string)     
+  }))
+}
+
+
+variable "rds_sg" {
+    description = "security group for rds"
+    type = string
+}
+
+
