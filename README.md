@@ -115,7 +115,6 @@ terraform destroy
         ├── main.tf        # MySQL RDS instance and security group
         ├── variables.tf   # RDS module input variables
         └── outputs.tf     # RDS outputs (db_endpoint)
-        ```
 
 ```
 ## Security Design 
