@@ -127,7 +127,7 @@ terraform destroy
 Purpose:
 Public entry point to the application.
 
-⸻
+
 
 - EC2 Security Group
     •    Allows:
@@ -138,7 +138,7 @@ Public entry point to the application.
 Purpose:
 Ensures application is not directly exposed to the internet.
 
-⸻
+
 
 - RDS Security Group
     •    Allows:
@@ -150,7 +150,7 @@ Purpose:
 Database is fully isolated from public.
 
 ## Lessons Learned 
----
+
 1. Terraform follows a strict flow of information. 
 2. Backend state should be stable before deployment. 
 3. For repeated resources and scalable design , terraform handles maps and objects better than simple lists. 
@@ -158,7 +158,7 @@ Database is fully isolated from public.
 5. Ensure security by effectivly using terraform.tfvars and implementing Sensitive = true arguments. 
 
 ## Problems Faced 
----
+
 1. Circular module depediencies, when creating modules I made VPC dependent on EC2 outputs, which did not follow a top down dependency flow. Causing ifrastructure errors 
 VPC -> subnets -> security -> ALB -> EC2 -> RDS 
 2. Backend state migration. Any changes to the configuration will make Terraform assume state location has been changed. 
