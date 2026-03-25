@@ -118,7 +118,7 @@ terraform destroy
         ...
         ```
 
-
+```
 ## Security Design 
 ### ALB Security Group
 - Allows:
