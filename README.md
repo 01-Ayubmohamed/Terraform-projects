@@ -87,7 +87,7 @@ terraform destroy
 ## Project Structure 
 
 ```bash
-.
+
 ├── main.tf                # Root module orchestrating all infrastructure modules
 ├── variables.tf           # Root input variables passed into modules
 ├── outputs.tf             # Root outputs (ALB DNS, RDS endpoint, etc)
@@ -115,7 +115,6 @@ terraform destroy
         ├── main.tf        # MySQL RDS instance and security group
         ├── variables.tf   # RDS module input variables
         └── outputs.tf     # RDS outputs (db_endpoint)
-        ...
         ```
 
 ```
