@@ -5,7 +5,7 @@
 
 
 ## Objectives 
----
+
 - Deploy a multi Az infrastructure using Terraform 
 - Modularise project into reusable components 
 - Design Security groups to achieve least privilege
@@ -13,7 +13,7 @@
 - Store terraform project in S3 backend state 
 
 ## Architecture 
----
+
 Project will consist of: 
 
 - Front/end layer - Application Load Balancer (ALB)
@@ -21,9 +21,10 @@ Project will consist of:
 - Database layer - RDS MySQL inside private subnet
 
 Traffic flow 
-' Internet -> ALB -> EC2 -> RDS 
+Internet -> ALB -> EC2 -> RDS 
 
 ### Networking 
+
 - Custom VPC  (10.0.0.0/16) 
 - public and private subnets 
 - Internet Gateway for public access 
@@ -34,6 +35,7 @@ ALB should be placed inside public subnets.
 RDS should be placed inside private subnets. 
 
 ### Application 
+
 The application layer consist of an EC2 running on WordPress 
 - EC2 instance deployed inside a private subnet 
 - Security group allows HTTP (80) access only from ALB security group 
@@ -43,6 +45,7 @@ This creates a secure EC2 instance with automated WordPress installation.
 
 
 ### Database 
+
 - The database layer uses Amazon RDS (MySQL).
 - Deployed inside private subnets (not public access)
 - Security group allows MySQL (3306) access from EC2 security group only
@@ -51,38 +54,39 @@ This creates a secure EC2 instance with automated WordPress installation.
 This ensures database isolation and secure communication between compute and storage layers.
 
 ## Deployment
----
+
 To deploy the infrastructure:
 ### Deploy infrastructure 
-'''bash
+
+```bash
 terraform init
 terraform plan
 terraform apply
-'''
+```
 
 ### Access Application
 
-'''bash
+```bash
 terraform output wordpress_public_ip
-'''
+```
 
 Use the ALB DNS name output to access the WordPress application in your browser
-'''bash
+```bash
 http://<alb_dns_name> 
-'''
+```
 
 if you have configured a domain via Route 53 and have 
 
 Destroy infrastructure
 
-'''bash
+```bash
 terraform destroy
-'''
+```
 
 
 ## Project Structure 
----
-'''bash
+
+```bash
 .
 ├── main.tf                # Root module orchestrating all infrastructure modules
 ├── variables.tf           # Root input variables passed into modules
@@ -112,7 +116,7 @@ terraform destroy
         ├── variables.tf   # RDS module input variables
         └── outputs.tf     # RDS outputs (db_endpoint)
         ...
-        '''
+        ```
 
 
 ## Security Design 
