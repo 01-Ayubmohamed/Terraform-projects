@@ -4,29 +4,22 @@ variable "vpc_id" {
     type = string
 }
   
-# variable for public and private subnets
 
-variable "public_subnets" {
-    type = list(object({
-        cidr_block = string
-        az         = string
-    }))
+# variable for public subnets
+
+variable "public_subnet_ids" {
+   type = list(string)
 }
 
-variable "private_subnets" {
-    type = list(object({
-        cidr_block = string
-        az         = string
-    }))
-}
 
-variable "az" {
-    type = list(string)
-}
-
-variable "ec2_sg_id" {
-    description = "Security group ID for EC2 instance"
-    type = string
+variable "ec2_sg" {
+  type = list(object({
+    port        = number
+    description = string
+    protocol    = string 
+    cidr_blocks = optional(list(string))        
+    security_groups = optional(list(string))     
+  }))
 }
 
 
@@ -39,10 +32,13 @@ variable "instance_type" {
 
 variable "instance_ami" {
     type    = string
-    default = "ami-0b6c6ebed2801a5cb"
+    default = "ami-02dfbd4ff395f2a1b"
 }
 
-
+variable "my_ip" {
+    type = string
+    default = ""
+}
 
 # variables for rds 
 variable "DB_NAME" {
@@ -54,12 +50,9 @@ variable "DB_USER" {
 variable "DB_PASSWORD" {
     sensitive = true 
 }
-
-
 variable "DB_HOST" {
     default = ""
 }
-
 variable "WEB_DIR" {
     default = "/var/www/html"
 }

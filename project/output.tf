@@ -4,23 +4,27 @@ output "vpc_id" {
     value       = module.VPC.vpc_id
 }
 
-
 output "db_subnet_group_name" {
     description = "The name of the RDS DB subnet group"
     value       = module.VPC.db_subnet_group_name
 }
 
-output "instance_id" {
+output "ec2_instance_id" {
     description = "The ID of the EC2 instance"
-    value       = module.EC2.instance_id
+    value       = module.EC2.ec2_instance_id
 }
 
-output "instance_public_ip" {
+output "wordpress_public_ip" {
     description = "The public IP address of the EC2 instance"
-    value       = module.EC2.instance_public_ip
+    value       = module.EC2.wordpress_public_ip
 }
 
-output "rds_endpoint" {
+output "db_endpoint" {
     description = "The endpoint of the RDS instance"
-    value       = module.RDS.DB_HOST
+    value       = module.RDS.db_endpoint
+}
+
+output "alb_dns_name" {
+  description = "The domain name of the ALB"
+  value       = module.ALB.alb_dns_name
 }

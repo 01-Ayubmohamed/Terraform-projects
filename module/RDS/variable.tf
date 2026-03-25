@@ -18,19 +18,14 @@ variable "instance_class" {
     type    = string
     default = "db.t3.micro"
 }
-
-variable "WEB_DIR" {
-    default = "/var/www/html"
-}
-
-variable "DB_HOST" {
-    default = ""
+variable "db_subnet_group_name" {
+    type = string
 }
 
 # variable for security group
 
-variable "rds_sg_id" {
-    description = "Security group ID for RDS"
+
+variable "ec2_sg_id" {
+    description = "Security group ID for EC2"
     type = string
 }
-

@@ -13,6 +13,11 @@ variable "azs" {
     default    = ["us-east-1a", "us-east-1b"]
 }
 
+variable "my_ip" {
+    description = "Your IP address for security group rules"
+    sensitive = true 
+}
+
 # variable for public and private subnets
 
 variable "public_subnets" {
@@ -29,8 +34,14 @@ variable "private_subnets" {
     }))
 }
 
+variable "subnet_ids" {
+    description = "List of subnet IDs, created by the VPC module"
+    default     = []
+}
+
 variable "db_subnet_group_name" {
-    default = "rds-subnet-group"
+    description = "Name of the RDS subnet group"
+    default     = "rds_subnet_group"
 }
 
 
@@ -83,43 +94,34 @@ variable rds_sg {
     default = ""
 }
 
-variable "ec2_sg_id" {
-  type = list(object({
-    port        = number
-    description = string
-    protocol    = string           # Add this
-    cidr_blocks = list(string)     # This should be inside the object
-  }))
-  
-  description = "List of ports with descriptions to allow in the security group"
-  
-  default = [
-    {
-      port        = 80
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-      description = "HTTP access"
+variable alb_sg {
+    type = list(object({
+        port        = number
+        description = string
+        protocol    = string          
+        cidr_blocks = list(string)     
+    }))
+
+    default = [{
+      port = 80 
+      protocol = "tcp"
+      cidr_blocks = [ "0.0.0.0/0" ]
+      description = "HTTPS acces"
     },
+    
     {
-      port        = 443
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      port = 443 
+      protocol = "tcp"
+      cidr_blocks = [ "0.0.0.0/0" ]
       description = "HTTPS access"
-    },
-    {
-      port        = 22
-      protocol    = "tcp"
-      cidr_blocks = ["31.54.72.180/32"]  # Your IP
-      description = "SSH access"
     }
-  ]
+    ]
 }
 
-
-# variable for environment
-variable "environment" {
+variable "target_group_arn" {
     default = ""
 }
+
 
 
 

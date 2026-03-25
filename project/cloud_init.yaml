@@ -7,21 +7,19 @@ packages:
   - httpd
   - wget
 
-runcmd:
-  # Install PHP
-  - amazon-linux-extras enable php8.1 -y
-  - yum install -y php php-mysqlnd php-gd php-mbstring php-xml php-curl
-  
-  # Download and install WordPress
-  - wget https://wordpress.org/latest.tar.gz -P /tmp
-  - tar -xzf /tmp/latest.tar.gz -C /tmp
-  - cp -r /tmp/wordpress/* /var/www/html/
-  
-  # Configure WordPress
-  - cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-  - sed -i "s/database_name_here/${DB_NAME}/; s/username_here/${DB_USER}/; s/password_here/${DB_PASSWORD}/; s/localhost/${DB_HOST}/" /var/www/html/wp-config.php
-  
-  # Set permissions and start Apache
-  - chown -R apache:apache /var/www/html
-  - systemctl start httpd
-  - systemctl enable httpd
+runcmd:  
+    - mkdir -p /var/www/html
+    - amazon-linux-extras enable php8.1 -y
+    - yum install -y php php-mysqlnd php-gd php-mbstring php-xml php-curl
+    - wget https://wordpress.org/latest.tar.gz -P /tmp
+    - tar -xzf /tmp/latest.tar.gz -C /tmp
+    - cp -r /tmp/wordpress/* /var/www/html/
+    - cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+    - sed -i "s/database_name_here/${DB_NAME}/; s/username_here/${DB_USER}/; s/password_here/${DB_PASSWORD}/; s/localhost/${DB_HOST}/" /var/www/html/wp-config.php
+
+    - chown -R apache:apache /var/www/html
+    - systemctl start httpd
+    - systemctl enable httpd
+    - sleep 10
+
+    
