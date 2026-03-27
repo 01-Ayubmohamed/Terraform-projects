@@ -40,7 +40,7 @@ RDS should be placed inside private subnets.
 The application layer consist of an EC2 running on WordPress 
 - EC2 instance deployed inside a private subnet 
 - Security group allows HTTP (80) access only from ALB security group 
-- WordPress bootstrapped configured using ```bash cloud-init ```
+- WordPress bootstrapped configured using ```cloud-init```
 
 This creates a secure EC2 instance with automated WordPress installation.  
 
