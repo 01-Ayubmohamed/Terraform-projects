@@ -26,6 +26,7 @@ resource "aws_instance" "wordpress_instance" {
 
 }
 
+
 resource "aws_security_group" "ec2_sg" {
   name        = "ec2_security_group"
   description = "Security group for EC2 instance"
